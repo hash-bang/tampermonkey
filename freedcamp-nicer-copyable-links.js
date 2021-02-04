@@ -22,9 +22,7 @@
 		var html =
 			'<div>'
 				+ `<a href="${issue.url}">`
-					+ '<strong>'
-						+ issue.id
-					+ '</strong>'
+					+ issue.id
 				+ '</a>'
 				+ ' - '
 				+ issue.title
