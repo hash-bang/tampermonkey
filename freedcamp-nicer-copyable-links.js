@@ -1,11 +1,11 @@
 // ==UserScript==
+// @version      0.2
 // @name         FreedCamp - Nicer copyable links
 // @namespace    http://tampermonkey.net/
-// @version      0.1
 // @description  Copy full issue links in FreedCamp instead of just the title
 // @author       Matt Carter <m@ttcarter.com>
 // @match        https://freedcamp.com/*
-// @grant        none
+// @updateURL    https://raw.githubusercontent.com/hash-bang/tampermonkey/master/freedcamp-nicer-copyable-links.js
 // ==/UserScript==
 
 (function() {

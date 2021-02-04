@@ -1,12 +1,13 @@
 // ==UserScript==
+// @version      0.2
 // @name         YTM: Always new
 // @namespace    http://tampermonkey.net/
-// @version      0.1
 // @description  Auto-next on music that has already been liked or disliked
 // @author       Matt Carter <m@ttcarter.com>
 // @match        https://music.youtube.com/*
 // @grant        none
 // @require      https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js
+// @updateURL    https://raw.githubusercontent.com/hash-bang/tampermonkey/master/youtube-music-always-new.js
 // ==/UserScript==
 
 var lastTrack = false;
