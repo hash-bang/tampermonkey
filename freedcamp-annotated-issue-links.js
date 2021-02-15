@@ -71,7 +71,7 @@
 	}
 
 	var lastLink; // Link we were viewing
-	$('#web-app-root').on('DOMSubtreeModified', throttle(()=> {
+	$('#web-app-root, .Drawer--fk-Drawer').on('DOMSubtreeModified', throttle(()=> {
 		if (window.location.pathname == lastLink) return; // Page hasn't changed
 		lastLink = window.location.pathname;
 		fcAnnotateLinks();
