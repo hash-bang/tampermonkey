@@ -1,5 +1,5 @@
 // ==UserScript==
-// @version      0.2
+// @version      0.3
 // @name         YTM: Always new
 // @namespace    http://tampermonkey.net/
 // @description  Auto-next on music that has already been liked or disliked
@@ -17,11 +17,12 @@ var lastTrack = false;
     'use strict';
 
     var checkTrack = ()=> {
+        if (checkTrack.timer) clearTimeout(checkTrack.timer);
         var thisTrack = $('.ytmusic-player-bar > yt-formatted-string.title').text();
 
         if (!lastTrack || thisTrack != lastTrack) {
             console.log('%cYTM:AN!', 'color: blue', 'Detected song change to', thisTrack);
-            setTimeout(()=> { // Let song settle
+            checkTrack.timer = setTimeout(()=> { // Let song settle
                 var isRated = !! ($('paper-icon-button.dislike[aria-pressed=true]').length || $('paper-icon-button.like[aria-pressed=true]').length);
                 console.log('%cYTM:AN!', 'color: blue', 'Detected song change to', thisTrack, 'isRated?', isRated);
                 lastTrack = thisTrack;
