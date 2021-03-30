@@ -23,13 +23,13 @@ var lastTrack = false;
         if (!lastTrack || thisTrack != lastTrack) {
             console.log('%cYTM:AN!', 'color: blue', 'Detected song change to', thisTrack);
             checkTrack.timer = setTimeout(()=> { // Let song settle
-                var isRated = !! ($('paper-icon-button.dislike[aria-pressed=true]').length || $('paper-icon-button.like[aria-pressed=true]').length);
+                var isRated = !! ($('tp-yt-paper-icon-button.dislike[aria-pressed=true]').length || $('tp-yt-paper-icon-button.like[aria-pressed=true]').length);
                 console.log('%cYTM:AN!', 'color: blue', 'Detected song change to', thisTrack, 'isRated?', isRated);
                 lastTrack = thisTrack;
 
                 if (isRated) {
                     console.log('%cYTM:AN!', 'color: blue', 'Moving to next track');
-                    $('paper-icon-button.next-button').trigger('click');
+                    $('tp-yt-paper-icon-button.next-button').trigger('click');
                 }
                 setTimeout(checkTrack, 1000);
             }, 1000);
