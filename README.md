@@ -29,6 +29,13 @@ freedcamp-nicer-copyable-links.js
 Replace the 'Copy issue description' link (hover over an issue title to see it) with something that copies the issue code + title rather than just the title.
 
 
+ms-todo-no-tooltips.js
+----------------------
+[ms-todo-no-tooltips.js](./ms-todo-no-tooltips.js)
+
+Remove the annoying dummy-mode tooltips from Microsoft ToDo / todo.live
+
+
 youtube-music-always-new.js
 ---------------------------
 [youtube-music-always-new.js](./youtube-music-always-new.js)
