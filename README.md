@@ -17,7 +17,7 @@ Scripts
 
 freedcamp-annotated-issue-links.js
 ----------------------------------
-[freedcamp-annotated-issue-links.js](./freedcamp-annotated-issue-links.js)
+[Install](./freedcamp-annotated-issue-links.js)
 
 Prepend icons next to each issue link showing an icon for its status.
 

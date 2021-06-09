@@ -1,9 +1,10 @@
 // ==UserScript==
-// @version      0.2
 // @name         FreedCamp - Annotated issue links
-// @namespace    http://tampermonkey.net/
+// @namespace    https://github.com/hash-bang/tampermonkey
+// @version      0.2
 // @description  Annotate all FreedCamp issue links with the status of the linked item
 // @author       Matt Carter <m@ttcarter.com>
+// @license      MIT
 // @match        https://freedcamp.com/*
 // @updateURL    https://raw.githubusercontent.com/hash-bang/tampermonkey/master/freedcamp-annotated-issue-links.js
 // ==/UserScript==
