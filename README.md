@@ -15,30 +15,30 @@ Installation
 Scripts
 =======
 
-freedcamp-annotated-issue-links.js
-----------------------------------
-[Install](https://raw.githubusercontent.com/hash-bang/tampermonkey/master/freedcamp-annotated-issue-links.js)
+Freedcamp - Annotated Issue Links
+---------------------------------
+[Install](https://raw.githubusercontent.com/hash-bang/tampermonkey/master/freedcamp-annotated-issue-links.user.js)
 
 Prepend icons next to each issue link showing an icon for its status.
 
 
-freedcamp-nicer-copyable-links.js
----------------------------------
-[freedcamp-nicer-copyable-links.js](./freedcamp-nicer-copyable-links.js)
+Freedcamp - Nicer Copyable Links
+--------------------------------
+[Install](https://raw.githubusercontent.com/hash-bang/tampermonkey/master/freedcamp-nicer-copyable-links.user.js)
 
 Replace the 'Copy issue description' link (hover over an issue title to see it) with something that copies the issue code + title rather than just the title.
 
 
-ms-todo-no-tooltips.js
-----------------------
-[ms-todo-no-tooltips.js](./ms-todo-no-tooltips.js)
+MS ToDo - No Tooltips
+---------------------
+[Install](https://raw.githubusercontent.com/hash-bang/tampermonkey/master/ms-todo-no-tooltips.user.js)
 
 Remove the annoying dummy-mode tooltips from Microsoft ToDo / todo.live
 
 
-youtube-music-always-new.js
----------------------------
-[youtube-music-always-new.js](./youtube-music-always-new.js)
+YouTube Music - Always New
+--------------------------
+[Install](https://raw.githubusercontent.com/hash-bang/tampermonkey/master/youtube-music-always-new.user.js)
 
 Auto-advance [YouTube Music](https://music.youtube.com) playlists if the track is detected as liked / disliked whenever the plugin is enabled.
 
