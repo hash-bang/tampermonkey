@@ -7,7 +7,7 @@
 // @match        https://music.youtube.com/*
 // @grant        none
 // @require      https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js
-// @updateURL    https://raw.githubusercontent.com/hash-bang/tampermonkey/master/youtube-music-always-new.js
+// @updateURL    https://raw.githubusercontent.com/hash-bang/tampermonkey/master/youtube-music-always-new.user.js
 // ==/UserScript==
 
 var lastTrack = false;
