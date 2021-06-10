@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         FreedCamp - Annotated issue links
 // @namespace    https://github.com/hash-bang/tampermonkey
-// @version      0.2
+// @version      0.3
 // @description  Annotate all FreedCamp issue links with the status of the linked item
 // @author       Matt Carter <m@ttcarter.com>
 // @license      MIT
@@ -14,6 +14,7 @@
 
 	var options = {
 		reviewAsCompleted: true, // Use the completed icon for "Review" issue statuses
+		labelBugs: true, // Whether to add a small label after Bug type issues
 	};
 
 
@@ -67,6 +68,9 @@
 							default:
 								console.log('Unknown issue status type:', issue.status_title);
 						}
+
+						if (options.labelBugs && issue.type == 'Bug')
+							$a.append('<span class="Tag--fk-Tag bug"><span class="Tag--fk-Tag-innerSpan">Bug</span></span>');
 					});
 			})
 	}
@@ -79,7 +83,11 @@
 	}, 500));
 
 	$('head')
-		.append('<style type="text/css">.fkail-icon { display: inline-flex; vertical-align: middle; margin-right: 5px; }');
+		.append('<style type="text/css">'
+			+ '.fkail-icon { display: inline-flex; vertical-align: middle; margin-right: 5px; }\n'
+			+ '.Tag--fk-Tag.bug { padding: 0px 8px; margin-left: 5px; }\n'
+			+ '</style>'
+		);
 
 	console.log('%cFreedCamp - Annotated issue links', 'color: blue', 'Started');
 })();
