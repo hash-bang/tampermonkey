@@ -6,7 +6,7 @@
 // @author       Matt Carter <m@ttcarter.com>
 // @license      MIT
 // @match        https://freedcamp.com/*
-// @updateURL    https://raw.githubusercontent.com/hash-bang/tampermonkey/master/freedcamp-annotated-issue-links.js
+// @updateURL    https://raw.githubusercontent.com/hash-bang/tampermonkey/master/freedcamp-annotated-issue-links.user.js
 // ==/UserScript==
 
 (function() {
