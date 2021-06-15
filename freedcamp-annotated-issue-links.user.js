@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         FreedCamp - Annotated issue links
 // @namespace    https://github.com/hash-bang/tampermonkey
-// @version      0.3
+// @version      0.4
 // @description  Annotate all FreedCamp issue links with the status of the linked item
 // @author       Matt Carter <m@ttcarter.com>
 // @license      MIT
@@ -76,10 +76,11 @@
 	}
 
 	var lastLink; // Link we were viewing
-	$('#web-app-root, .Drawer--fk-Drawer').on('DOMSubtreeModified', throttle(()=> {
-		if (window.location.pathname == lastLink) return; // Page hasn't changed
+	$('#web-app-root, .Drawer--fk-Drawer, .DropFiles--fk-DropFiles-Area-Content').on('DOMSubtreeModified', throttle(()=> {
+		if ($('.ItemViewContent--fk-ItemViewContent-Description').hasClass('fc-annotated')) return; // Already annotated
 		lastLink = window.location.pathname;
 		fcAnnotateLinks();
+		$('.ItemViewContent--fk-ItemViewContent-Description').addClass('fc-annotated');
 	}, 500));
 
 	$('head')
