@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         FreedCamp - Annotated issue links
 // @namespace    https://github.com/hash-bang/tampermonkey
-// @version      0.4
+// @version      0.5
 // @description  Annotate all FreedCamp issue links with the status of the linked item
 // @author       Matt Carter <m@ttcarter.com>
 // @license      MIT
@@ -70,7 +70,7 @@
 						}
 
 						if (options.labelBugs && issue.type == 'Bug')
-							$a.append('<span class="Tag--fk-Tag bug"><span class="Tag--fk-Tag-innerSpan">Bug</span></span>');
+							$a.append('<span class="Tag--fk-Tag bug"><span class="Tag--fk-Tag-innerSpan">Fix</span></span>');
 					});
 			})
 	}
