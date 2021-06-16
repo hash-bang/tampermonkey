@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         FreedCamp - Annotated issue links
 // @namespace    https://github.com/hash-bang/tampermonkey
-// @version      0.5
+// @version      0.6
 // @description  Annotate all FreedCamp issue links with the status of the linked item
 // @author       Matt Carter <m@ttcarter.com>
 // @license      MIT
@@ -85,8 +85,8 @@
 
 	$('head')
 		.append('<style type="text/css">'
-			+ '.fkail-icon { display: inline-flex; vertical-align: middle; margin-right: 5px; }\n'
-			+ '.Tag--fk-Tag.bug { padding: 0px 8px; margin-left: 5px; }\n'
+			+ '.fkail-icon { display: inline-flex; vertical-align: middle; margin-right: 5px; user-select: none }\n'
+			+ '.Tag--fk-Tag.bug { padding: 0px 8px; margin-left: 5px; user-select: none }\n'
 			+ '</style>'
 		);
 
