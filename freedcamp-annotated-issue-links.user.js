@@ -13,8 +13,15 @@
 	'use strict';
 
 	var options = {
+		// General
 		reviewAsCompleted: true, // Use the completed icon for "Review" issue statuses
+
+		// Bug labelling
 		labelBugs: true, // Whether to add a small label after Bug type issues
+
+		// Waiting on Client functionality
+		waitOnClient: 'Waiting on Client', // Replace 'Auto-Reported' status in issues with this text, set to false to disable
+		labelWoC: true, // Whether to add a small label on "Waiting on Client" issues
 	};
 
 
@@ -70,7 +77,10 @@
 						}
 
 						if (options.labelBugs && issue.type == 'Bug')
-							$a.append('<span class="Tag--fk-Tag bug"><span class="Tag--fk-Tag-innerSpan">Fix</span></span>');
+							$a.append('<span class="Tag--fk-Tag fca-badge bug"><span class="Tag--fk-Tag-innerSpan">Fix</span></span>');
+
+						if (options.labelWoC && issue.type == 'Auto-Reported')
+							$a.append('<span class="Tag--fk-Tag fca-badge woc"><span class="Tag--fk-Tag-innerSpan">Wait</span></span>');
 					});
 			})
 	}
@@ -85,10 +95,25 @@
 
 	$('head')
 		.append('<style type="text/css">'
-			+ '.fkail-icon { display: inline-flex; vertical-align: middle; margin-right: 5px; user-select: none }\n'
-			+ '.Tag--fk-Tag.bug { padding: 0px 8px; margin-left: 5px; user-select: none }\n'
+			+ '.fkail-icon { display: inline-flex; vertical-align: middle; margin-right: 5px; }\n'
+			+ '.Tag--fk-Tag.fca-badge { padding: 0px 8px; margin-left: 5px; text-transform: none }\n'
+			+ '.Tag--fk-Tag.fca-badge > .Tag--fk-Tag-innerSpan { text-transform: none }\n'
+			+ '.Tag--fk-Tag.bug { background: #ccc }\n'
+			+ '.Tag--fk-Tag.woc { background: #ffe4c4 }\n'
 			+ '</style>'
 		);
+
+	if (options.waitOnClient)
+		$('body').on('DOMSubtreeModified', throttle(()=> { // Watch for DOM changes and replace text for status
+			// Replace in dynamic dropdowns
+			$('.react-select__option:contains(Auto-Reported)').text(options.waitOnClient);
+
+			// Replace inline on form
+			$('.ItemViewValue--fk-ItemAdvancedFields-Value span:contains(Auto-Reported)').text(options.waitOnClient)
+
+			// Replace within edit form
+			$('.Modal--fk-Modal-Body .react-select__value-container .react-select__single-value:contains(Auto-Reported)').text(options.waitOnClient)
+		}))
 
 	console.log('%cFreedCamp - Annotated issue links', 'color: blue', 'Started');
 })();
