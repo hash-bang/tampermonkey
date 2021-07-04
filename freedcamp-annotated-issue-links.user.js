@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         FreedCamp - Annotated issue links
 // @namespace    https://github.com/hash-bang/tampermonkey
-// @version      0.7
+// @version      0.8
 // @description  Annotate all FreedCamp issue links with the status of the linked item
 // @author       Matt Carter <m@ttcarter.com>
 // @license      MIT
@@ -61,6 +61,7 @@
 								$a.prepend('<svg class="fkail-icon fkIconClass Icon--fk-Icon Icon--Icon--fk-Icon ProgressIcon--fk-ProgressIcon ProgressIcon--fkProgressIconComplete" width="1em" height="1em" viewBox="0 0 18 18" style="color: rgb(160, 166, 199);"><defs><path d="M8.354 0c4.606 0 8.354 3.748 8.354 8.354 0 4.606-3.748 8.354-8.354 8.354C3.748 16.708 0 12.96 0 8.354 0 3.748 3.748 0 8.354 0z" id="a"></path><filter x="-14.7%" y="-14.7%" width="129.5%" height="129.5%" filterUnits="objectBoundingBox" id="b"><feGaussianBlur stdDeviation="1.5" in="SourceAlpha" result="shadowBlurInner1"></feGaussianBlur><feOffset dy="1" in="shadowBlurInner1" result="shadowOffsetInner1"></feOffset><feComposite in="shadowOffsetInner1" in2="SourceAlpha" operator="arithmetic" k2="-1" k3="1" result="shadowInnerInner1"></feComposite><feColorMatrix values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0.12 0" in="shadowInnerInner1"></feColorMatrix></filter></defs><g transform="translate(.6 .6)" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd"><g opacity="0.5" fill-rule="nonzero"><use fill="#27AE60" xlink:href="#a"></use><use fill="#000" filter="url(#b)" xlink:href="#a"></use><use stroke="#27AE60" stroke-width="0.928200009" xlink:href="#a"></use></g><path fill="#FFF" d="M7.30957507 11.9187843L3.74459089 8.35380008 5.22112505 6.87726592 7.30957507 8.96571594 11.4864751 4.7888159 12.9630093 6.26535006z"></path></g></svg>');
 								break;
 							case 'InProgress':
+							case 'In Progress':
 								$a.prepend('<svg class="fkail-icon fkIconClass Icon--fk-Icon Icon--Icon--fk-Icon ProgressIcon--fk-ProgressIcon" width="1em" height="1em" viewBox="0 0 16 16" style="color: rgb(160, 166, 199);"><g fill-rule="nonzero" fill="none"><path d="M15.25 8a7.227 7.227 0 0 1-2.126 5.124A7.227 7.227 0 0 1 8 15.25a7.227 7.227 0 0 1-5.124-2.126A7.227 7.227 0 0 1 .75 8c0-1.999.813-3.811 2.126-5.124A7.227 7.227 0 0 1 8 .75c1.999 0 3.811.813 5.124 2.126A7.227 7.227 0 0 1 15.25 8z" stroke="#FF8900" stroke-width="1.5"></path><path d="M7.924 2.641a5.289 5.289 0 0 1 5.283 5.283 5.255 5.255 0 0 1-1.058 3.168L7.924 7.924z" class="inProgressInner" fill="#FF8900"></path></g></svg>');
 								break;
 							case 'Invalid':
