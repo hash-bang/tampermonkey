@@ -12,6 +12,14 @@ Installation
 Scripts
 =======
 
+Darkreader
+----------
+[Install](https://raw.githubusercontent.com/hash-bang/tampermonkey/master/darkreader.user.js)
+
+DarkReader wrapper without the Chrome bloat.
+
+
+
 Freedcamp - Annotated Issue Links
 ---------------------------------
 [Install](https://raw.githubusercontent.com/hash-bang/tampermonkey/master/freedcamp-annotated-issue-links.user.js)

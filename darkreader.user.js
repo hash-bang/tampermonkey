@@ -2,7 +2,7 @@
 // @name         DarkReader
 // @namespace    https://github.com/hash-bang/tampermonkey
 // @version      0.1
-// @description  DarkReader simple wrapper without the Chrome bloat
+// @description  DarkReader wrapper without the Chrome bloat
 // @author       Matt Carter <m@ttcarter.com>
 // @match        *://*/*
 // @updateURL    https://raw.githubusercontent.com/hash-bang/tampermonkey/master/darkreader.user.js
