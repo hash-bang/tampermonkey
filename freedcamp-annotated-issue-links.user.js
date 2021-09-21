@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         FreedCamp - Annotated issue links
 // @namespace    https://github.com/hash-bang/tampermonkey
-// @version      0.9
+// @version      0.10
 // @description  Annotate all FreedCamp issue links with the status of the linked item
 // @author       Matt Carter <m@ttcarter.com>
 // @license      MIT
@@ -15,6 +15,8 @@
 	var options = {
 		// General
 		reviewAsCompleted: true, // Use the completed icon for "Review" issue statuses
+		allProjectsFallback: true, // Fallback to fetchig ALL issues rather than just the active project if a link indicates its from elsewhere
+		logPrefix: ['%cFreedCamp - Annotated issue links', 'color: blue'],
 
 		// Bug labelling
 		labelBugs: true, // Whether to add a small label after Bug type issues
@@ -23,7 +25,8 @@
 		waitOnClient: 'Waiting on Client', // Replace 'Auto-Reported' status in issues with this text, set to false to disable
 		labelWoC: true, // Whether to add a small label on "Waiting on Client" issues
 	};
-	var projectId = window.location.pathname.replace(/^.*\/view\/(\d+).*$/, '$1'); // ID of the project to filter issues by
+
+	var projectId = window.location.pathname.replace(/^.*\/view\/(\d+).*$/, '$1'); // ID of the project to filter issues by, if false, fetch all projects (set to this if allProjectsFallback detects external link)
 	var issues; // Result of issue API data call if we've already made one
 
 
@@ -45,10 +48,18 @@
 	function fcFetchIssues() {
 		if (issues) return issues; // Use previously fetched version if there is one
 
-		return fetch(`https://freedcamp.com/iapi/issues?project_id=${projectId}`)
+		return fetch(
+			projectId // Do we have a projectId? If so filter issues only by that
+				? `https://freedcamp.com/iapi/issues?project_id=${projectId}`
+				: `https://freedcamp.com/iapi/issues` // Otherwise pull in all projects
+		)
 			.then(res => res.json())
 			.then(res => res.data && res.data.issues)
 			.then(res => res || Promise.reject('Cannot fetch issue list'))
+			.then(issuesList => {
+				console.log(...options.logPrefix, 'Fetched', issuesList.length, 'issues');
+				return issuesList;
+			})
 			.then(issuesList => issues = issuesList.reduce((issueObj, issue) => {
 				issueObj[issue.id] = issue;
 				return issueObj;
@@ -64,8 +75,23 @@
 	function fcAnnotateLinks() {
 		var issues = {}; // Hash of issues we are fetching
 
-		console.log('%cFreedCamp - Annotated issue links', 'color: blue', 'Refresh', window.location.pathname);
+		console.log(...options.logPrefix, 'Refresh', window.location.pathname);
 		return Promise.resolve()
+			.then(()=> { // Detect cross-project links (setting projectId to false if found)
+				if (!options.allProjectsFallback) return;
+				if (
+					$('.ItemDescription--fkItemDescriptionContainer a')
+						.toArray()
+						.some(el => {
+							var link = /https:\/\/freedcamp.com\/view\/(?<project>\d+)\/issuetracker\/(?<issue>\d+)$/.exec($(el).attr('href') || '');
+							if (!link.groups) return false; // Not a link anyway
+							if (link.groups.project > 0 && link.groups.project != projectId) return true; // Found mismatched project
+						})
+				) {
+					console.log(...options.logPrefix, 'Found cross-linked projects - fetching ALL issues rather than filtering by project');
+					projectId = false;
+				}
+			})
 			.then(()=> fcFetchIssues())
 			.then(issues => $('.ItemDescription--fkItemDescriptionContainer a')
 				.each((index, a) => {
@@ -138,5 +164,5 @@
 			$('.Modal--fk-Modal-Body .react-select__value-container .react-select__single-value:contains(Auto-Reported)').text(options.waitOnClient)
 		}))
 
-	console.log('%cFreedCamp - Annotated issue links', 'color: blue', 'Started');
+	console.log(...options.logPrefix, 'Started');
 })();
