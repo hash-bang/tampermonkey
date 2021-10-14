@@ -27,6 +27,13 @@ Freedcamp - Annotated Issue Links
 Prepend icons next to each issue link showing an icon for its status.
 
 
+Freedcamp - Links
+-----------------
+[Install](https://raw.githubusercontent.com/hash-bang/tampermonkey/master/freedcamp-links.user.js)
+
+Force Freedcamp to treat links like links. Disable sidebar pop-outs and any other behaviour.
+
+
 Freedcamp - Nicer Copyable Links
 --------------------------------
 [Install](https://raw.githubusercontent.com/hash-bang/tampermonkey/master/freedcamp-nicer-copyable-links.user.js)
