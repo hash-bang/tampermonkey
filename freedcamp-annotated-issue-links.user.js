@@ -27,6 +27,7 @@
 	};
 
 	var projectId = window.location.pathname.replace(/^.*\/view\/(\d+).*$/, '$1'); // ID of the project to filter issues by, if false, fetch all projects (set to this if allProjectsFallback detects external link)
+	var forceRefresh = false;
 	var issues; // Result of issue API data call if we've already made one
 
 
@@ -46,8 +47,8 @@
 	* @returns {Promise<Object>} An eventual object lookup of issue.id -> issue object
 	*/
 	function fcFetchIssues() {
-		if (issues) return issues; // Use previously fetched version if there is one
-
+		if (!forceRefresh || issues) return issues; // Use previously fetched version if there is one
+		forceRefresh = false;
 		return fetch(
 			projectId // Do we have a projectId? If so filter issues only by that
 				? `https://freedcamp.com/iapi/issues?project_id=${projectId}`
@@ -83,20 +84,21 @@
 					$('.ItemDescription--fkItemDescriptionContainer a')
 						.toArray()
 						.some(el => {
-							var link = /https:\/\/freedcamp.com\/view\/(?<project>\d+)\/issuetracker\/(?<issue>\d+)$/.exec($(el).attr('href') || '');
-							if (!link.groups) return false; // Not a link anyway
+							var link = /https:\/\/freedcamp.com\/view\/(?<project>\d+)\/issuetracker(|\/panel\/issue)\/(?<issue>\d+)$/.exec($(el).attr('href') || '');
+							if (!link || !link.groups) return false; // Not a link anyway
 							if (link.groups.project > 0 && link.groups.project != projectId) return true; // Found mismatched project
 						})
 				) {
 					console.log(...options.logPrefix, 'Found cross-linked projects - fetching ALL issues rather than filtering by project');
 					projectId = false;
+					forceRefresh = true;
 				}
 			})
 			.then(()=> fcFetchIssues())
 			.then(issues => $('.ItemDescription--fkItemDescriptionContainer a')
 				.each((index, a) => {
 					var $a = $(a);
-					var link = /https:\/\/freedcamp.com\/view\/(?<project>\d+)\/issuetracker\/(?<issue>\d+)$/.exec($a.attr('href') || '');
+					var link = /https:\/\/freedcamp.com\/view\/(?<project>\d+)\/issuetracker(|\/panel\/issue)\/(?<issue>\d+)$/.exec($a.attr('href') || '');
 					if (!link) return; // Not an issue tracker link
 					link = link.groups; // Default to using named groups
 					var issue = issues[link.issue];
