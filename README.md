@@ -48,6 +48,13 @@ MS ToDo - No Tooltips
 Remove the annoying dummy-mode tooltips from Microsoft ToDo / todo.live
 
 
+Whereby - Nicer logout screen
+-----------------------------
+[Install](https://raw.githubusercontent.com/hash-bang/tampermonkey/master/whereby-nicer-logout.user.js)
+
+Remove up-sells on the post-meeting screen.
+
+
 YouTube Music - Always New
 --------------------------
 [Install](https://raw.githubusercontent.com/hash-bang/tampermonkey/master/youtube-music-always-new.user.js)
