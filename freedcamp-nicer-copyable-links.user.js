@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         FreedCamp - Nicer copyable links
 // @namespace    https://github.com/hash-bang/tampermonkey
-// @version      0.3
+// @version      0.4
 // @description  Copy full issue links in FreedCamp instead of just the title
 // @author       Matt Carter <m@ttcarter.com>
 // @match        https://freedcamp.com/*
@@ -12,7 +12,7 @@
 	'use strict';
 	function fcCopyReference() {
 		var issue = { // Details about this issue
-			id: $('.ItemCommentsPage--fk-ItemCommentsPage-Content .issue_id').text(),
+			id: $('.ItemViewFields--fk-ItemViewField-Container:last-child > .ItemViewFields--fk-ItemViewField-Value').text(),
 			title: $('.ItemCommentsPage--fk-ItemCommentsPage-Content .ItemViewSubheader--fk-ItemBasicFields-Title').text(),
 			url: window.location.href,
 		};
