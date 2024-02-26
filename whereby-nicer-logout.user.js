@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         Whereby - Nicer logout screen
 // @namespace    http://tampermonkey.net/
-// @version      0.1
+// @version      2.0
 // @description  Remove up-sells on the post-meeting screen
 // @author       Matt Carter <m@ttcarter.com>
 // @match        https://whereby.com/*
@@ -27,6 +27,14 @@
 		// Fetch the Whereby button style from an existing button on-screen
 		let prototypeButtonClasses = (document.querySelector('[class^="Button-"][class*="primary"]')?.classList || 'button').toString();
 
+        $('[class^=content-v2eD]')
+            .css({
+                'display': 'flex',
+                'justify-content': 'center',
+                'align-items': 'end',
+                'height': '100%',
+            })
+
 		$('[class^="RoomLeftLayout-"] > [class^="inner"]')
 			.empty() // Remove existing child elements
 			.css({ // Stretch main display area across screen height
@@ -37,6 +45,7 @@
 				$('<a>')
 					.text('New meeting...')
 					.addClass(prototypeButtonClasses)
+					.css('padding', '0 100px')
 					.on('click', ()=> window.location.reload())
 			)
 
