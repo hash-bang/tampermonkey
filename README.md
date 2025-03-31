@@ -41,6 +41,13 @@ Freedcamp - Nicer Copyable Links
 Replace the 'Copy issue description' link (hover over an issue title to see it) with something that copies the issue code + title rather than just the title.
 
 
+Freedcamp - Yes I've Donated
+----------------------------
+[Install](https://raw.githubusercontent.com/hash-bang/tampermonkey/master/freedcamp-yes-ive-donated.user.js)
+
+Prevent the annoying modal popup asking for donations.
+
+
 MS ToDo - No Tooltips
 ---------------------
 [Install](https://raw.githubusercontent.com/hash-bang/tampermonkey/master/ms-todo-no-tooltips.user.js)
