@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         Whereby - Nicer logout screen
 // @namespace    http://tampermonkey.net/
-// @version      2.0
+// @version      2.1
 // @description  Remove up-sells on the post-meeting screen
 // @author       Matt Carter <m@ttcarter.com>
 // @match        https://whereby.com/*
@@ -27,41 +27,47 @@
 		// Fetch the Whereby button style from an existing button on-screen
 		let prototypeButtonClasses = (document.querySelector('[class^="Button-"][class*="primary"]')?.classList || 'button').toString();
 
-        $('[class^=content-v2eD]')
-            .css({
-                'display': 'flex',
-                'justify-content': 'center',
-                'align-items': 'end',
-                'height': '100%',
-            })
+		$('[class^=content-v2eD]')
+			.css({
+				'display': 'flex',
+				'justify-content': 'center',
+				'align-items': 'end',
+				'height': '100%',
+			})
 
-		$('[class^="RoomLeftLayout-"] > [class^="inner"]')
+		$('[class^="_RoomLeftLayout_"] > [class^="_inner_"]')
 			.empty() // Remove existing child elements
 			.css({ // Stretch main display area across screen height
-				'height': '100%',
+				'position': 'fixed',
+				'top': '0px',
+				'left': '0px',
+				'right': '0px',
+				'bottom': '0px',
 				'align-items': 'end',
+				'justify-content': 'center',
+				'padding-bottom': '40px',
+				'max-width': '100% !important',
 			})
 			.append( // Create 'New meeting' button
-				$('<a>')
+				$('<button>')
 					.text('New meeting...')
 					.addClass(prototypeButtonClasses)
-					.css('padding', '0 100px')
+					.css('padding', '10px 100px')
 					.on('click', ()=> window.location.reload())
 			)
 
 		// Background image
-		$('[class*="bgImg-"]')
+		$('[class^="_RoomBackground_"]')
+			.find('img')
 			.css({
 				'filter': 'brightness(.66) blur(25px)',
 				'height': 'calc(100vh + 40px)',
 				'left': '-20px',
 				'top': '-20px',
 				'width': 'calc(100vw + 40px)',
-			});
-
-		// Background logo
-		$('[class*="RoomBackground-"]')
-			.append(
+			})
+			.end()
+			.append( // Background logo
 				$('<div>')
 					.addClass('animated-logo')
 					.css({
@@ -74,9 +80,9 @@
 						'width': 'auto',
 						'z-index': '2',
 					})
-			)
+			);
 
-		animatedLogo = document.querySelector('[class*="RoomBackground-"] > .animated-logo');
+		animatedLogo = document.querySelector('[class*="_RoomBackground_"] > .animated-logo');
 
 		calculateSizes();
 		// Initial position
@@ -90,7 +96,8 @@
 
 	// Watch for "meeting has ended" div creation {{{
 	let bodyObserver = new MutationObserver(()=> {
-		if (document.querySelector('[class^="RoomLeftLayout-"]')) { // Found "has left room" element
+		if (document.querySelector('[class^="_RoomLeftLayout_"]')) { // Found "has left room" element
+			console.log('Whereby Nicer logout - detected end-of-meeting');
 			bodyObserver.disconnect();
 			meetingEnded();
 		}
